@@ -5,6 +5,10 @@ VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SplitExpenseBE", "SplitExpenseBE.csproj", "{AD4295DA-00AC-491B-AAFD-651D5D9599BB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SplitExpense.Core", "..\SplitExpense.Core\SplitExpense.Core.csproj", "{82705C4C-CF99-4E58-AC5F-B7D6D53F895F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SplitExpense.Infra", "..\SplitExpense.Infra\SplitExpense.Infra.csproj", "{63EBEB9E-5F73-4E7E-9D9C-98F93F2F495B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{AD4295DA-00AC-491B-AAFD-651D5D9599BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD4295DA-00AC-491B-AAFD-651D5D9599BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD4295DA-00AC-491B-AAFD-651D5D9599BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82705C4C-CF99-4E58-AC5F-B7D6D53F895F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82705C4C-CF99-4E58-AC5F-B7D6D53F895F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82705C4C-CF99-4E58-AC5F-B7D6D53F895F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82705C4C-CF99-4E58-AC5F-B7D6D53F895F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63EBEB9E-5F73-4E7E-9D9C-98F93F2F495B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63EBEB9E-5F73-4E7E-9D9C-98F93F2F495B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63EBEB9E-5F73-4E7E-9D9C-98F93F2F495B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63EBEB9E-5F73-4E7E-9D9C-98F93F2F495B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
