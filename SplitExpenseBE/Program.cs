@@ -1,5 +1,7 @@
 
 using Serilog;
+using SplitExpense.Domain;
+using SplitExpense.Infra;
 
 namespace SplitExpenseBE
 {
@@ -14,13 +16,15 @@ namespace SplitExpenseBE
                 .ReadFrom.Configuration(Configuration)
                 .CreateLogger();
             var builder = WebApplication.CreateBuilder(args);
-
+            builder.Services.AddDomainServices();
+            builder.Services.AddInfraServices(builder.Configuration);
             // Add services to the container.
             builder.Host.UseSerilog();
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             var app = builder.Build();
 
