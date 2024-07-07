@@ -11,5 +11,6 @@ namespace SplitExpense.Core.RepositoryContracts
     {
         IEnumerable<User> GetUsers();
         Guid InsertUser(User user);
+
     }
 }

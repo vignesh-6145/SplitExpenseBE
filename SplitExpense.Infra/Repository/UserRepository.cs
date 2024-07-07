@@ -20,7 +20,7 @@ namespace SplitExpense.Infra.Repository
         }
 
             public IEnumerable<User> GetUsers(){
-            return null;
+            return _context.Users;
         }
 
         public Guid InsertUser(User user)

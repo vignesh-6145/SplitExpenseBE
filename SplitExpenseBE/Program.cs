@@ -1,5 +1,8 @@
 
+using Microsoft.AspNetCore.Authentication;
 using Serilog;
+using SplitExpense.Core.Authentication.Basic;
+using SplitExpense.Core.Authentication.Basic.Handlers;
 using SplitExpense.Domain;
 using SplitExpense.Infra;
 
@@ -17,6 +20,7 @@ namespace SplitExpenseBE
                 .CreateLogger();
             var builder = WebApplication.CreateBuilder(args);
             builder.Services.AddDomainServices();
+            builder.Services.AddCors();
             builder.Services.AddInfraServices(builder.Configuration);
             // Add services to the container.
             builder.Host.UseSerilog();
@@ -25,6 +29,8 @@ namespace SplitExpenseBE
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            builder.Services.AddAuthentication()
+                .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>(BasicAuthenticationDefaults.AuthenticationScheme, null);
 
             var app = builder.Build();
 
@@ -37,6 +43,9 @@ namespace SplitExpenseBE
 
             app.UseHttpsRedirection();
             app.UseSerilogRequestLogging();
+            app.UseCors(x => x.AllowAnyOrigin()
+                               .AllowAnyMethod()
+                               .AllowAnyHeader());
             app.UseAuthorization();
 
             

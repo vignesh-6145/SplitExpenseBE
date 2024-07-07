@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using SplitExpense.Core.Exceptions;
 using SplitExpense.Core.RepositoryContracts;
 using SplitExpense.Core.ServiceContracts;
 using SplitExpense.Core.ViewModels;
@@ -19,10 +20,9 @@ namespace SplitExpense.Domain.Services
             this._mapper = mapper;
             this._userRepository = userRepository;
         }
-        public string GetUser()
+        public IEnumerable<User> GetUser()
         {
-            Console.WriteLine(_userRepository.GetUsers()==null);
-            return ""+_userRepository.GetUsers();
+            return _userRepository.GetUsers();
         }
 
         public Guid RegisterUser(UserRegistration user)
@@ -35,9 +35,43 @@ namespace SplitExpense.Domain.Services
 
         public bool IsValidUser(string Email)
         {
-            var users = _userRepository.GetUsers();
+            try
+            {
+                var userEmails = _userRepository.GetUsers().Select(usr => usr.Email).ToList();
+                return userEmails.Contains(Email);
+            }catch(Exception ex)
+            {
+                throw new UserNotFoundException(Email);
+            }
+        }
+
+        public User AuthenticateUser(string email, string password)
+        {
+            try
+            {
+                var user = _userRepository.GetUsers()
+                                                .First(usr => usr.Email == email);
+                if (user == null)
+                {
+                    throw new UnauthorizedAccessException();
+                }
+                if(user.Password!=password)
+                {
+                    throw new UnauthorizedAccessException("Please check your credentials");
+                }
+                return user;
+            }catch(UserNotFoundException ex)
+            {
+                throw new UserNotFoundException(email);
+            }catch(UnauthorizedAccessException uae)
+            {
+                throw uae;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
             
-            return users.Any(usr => usr.Email==Email);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using SplitExpense.Core.ViewModels;
+using SplitExpense.Infra;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,9 @@ namespace SplitExpense.Core.ServiceContracts
 {
     public interface IUserService
     {
-        string GetUser();
-
-        bool IsValidUser(string Email);
+        IEnumerable<User> GetUser();
+        User AuthenticateUser(string email, string password);
+        bool IsValidUser(string email);
         Guid RegisterUser(UserRegistration user);
     }
 }
