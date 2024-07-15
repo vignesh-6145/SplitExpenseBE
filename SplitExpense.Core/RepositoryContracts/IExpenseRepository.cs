@@ -7,11 +7,9 @@ using System.Threading.Tasks;
 
 namespace SplitExpense.Core.RepositoryContracts
 {
-    public interface IUserRepository
+    public interface IExpenseRepository
     {
-        IEnumerable<User> GetUsers();
-        Guid InsertUser(User user);
-
-
+        Guid AddExpense(Expense expense);
+        IEnumerable<Expense> GetExpenses(Guid userId);
     }
 }

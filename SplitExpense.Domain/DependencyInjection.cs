@@ -14,6 +14,7 @@ namespace SplitExpense.Domain
         public static IServiceCollection AddDomainServices(this IServiceCollection services)
         {
             services.AddScoped<IUserService, UserServices>();
+            services.AddScoped<IExpenseService, ExpenseService>();
             return services;
         }
     }
