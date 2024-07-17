@@ -19,7 +19,7 @@ namespace SplitExpense.Infra.Repository
             _logger = logger;
         }
 
-            public IEnumerable<User> GetUsers(){
+        public IEnumerable<User> GetUsers(){
             return _context.Users;
         }
 

@@ -18,6 +18,7 @@ namespace SplitExpense.Infra
         public static IServiceCollection AddInfraServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IExpenseRepository, ExpenseRepository>();
             services.AddDbContext<SplitExpenseContext>(
             options => options.UseSqlServer(
                     configuration.GetConnectionString("localDb")
