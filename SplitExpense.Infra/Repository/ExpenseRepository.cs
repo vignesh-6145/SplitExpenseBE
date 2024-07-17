@@ -31,7 +31,9 @@ namespace SplitExpense.Infra.Repository
         public IEnumerable<Expense> GetExpenses(Guid userId)
         {
             _logger.LogInformation("Retrieving expenses");
-            return _context.Expenses.ToList();
+            return _context.Expenses
+                .Where(expense => expense.UserId==userId)
+                .ToList();
         }
     }
 }
