@@ -12,5 +12,8 @@ namespace SplitExpense.Core.ServiceContracts
     {
         Guid AddExpense(ExpenseInformation expense);
         IEnumerable<Expense> GetUserExpenses(Guid userId);
+        
+        Expense GetExpense(Guid expenseId);
+        void RemoveExpense(Guid expenseId);
     }
 }

@@ -11,5 +11,9 @@ namespace SplitExpense.Core.RepositoryContracts
     {
         Guid AddExpense(Expense expense);
         IEnumerable<Expense> GetExpenses(Guid userId);
+
+        Expense GetExpense(Guid expenseId);
+
+        int DeleteExpense(Guid expenseId);
     }
 }

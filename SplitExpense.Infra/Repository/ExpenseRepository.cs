@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using SplitExpense.Core.RepositoryContracts;
 using SplitExpense.Infra.Data;
 using System;
@@ -34,6 +35,27 @@ namespace SplitExpense.Infra.Repository
             return _context.Expenses
                 .Where(expense => expense.UserId==userId)
                 .ToList();
+        }
+
+        public Expense GetExpense(Guid expenseId)
+        {
+            _logger.LogInformation("Retrieving expense - {expenseId}",expenseId);
+            return _context.Expenses.Find(expenseId);
+        }
+
+        public int DeleteExpense(Guid expenseId)
+        {
+            _logger.LogInformation("Deleting expense with id - {expenseID}",expenseId);
+            var expense = _context.Expenses.Find(expenseId);
+            if (expense != null)
+            {
+                _context.Expenses.Remove(expense);
+                _context.SaveChanges();
+                return 1;
+            }
+            _logger.LogInformation("No expense found with given ID - {expenseId}",expenseId);
+            return 0;
+
         }
     }
 }

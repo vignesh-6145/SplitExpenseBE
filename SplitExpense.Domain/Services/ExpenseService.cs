@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.Logging;
+using SplitExpense.Core.Exceptions;
 using SplitExpense.Core.RepositoryContracts;
 using SplitExpense.Core.ServiceContracts;
 using SplitExpense.Core.ViewModels;
@@ -37,6 +38,28 @@ namespace SplitExpense.Domain.Services
             _logger.LogInformation("Service initiated to retrieve expenses");
             var Expenses = _expenseRepository.GetExpenses(userId);
             return Expenses;
+        }
+        
+        public Expense GetExpense(Guid expenseID)
+        {
+            _logger.LogInformation("Service initiated to retrieve a expense");
+            var expense = _expenseRepository.GetExpense(expenseID);
+            if (expense == null)
+            {
+                _logger.LogInformation("No Expense with given id");
+                throw new ExpenseNotFoundException(expenseID);
+            }
+            return expense;
+        }
+
+        public void RemoveExpense(Guid expenseID)
+        {
+            _logger.LogInformation("Service initiated to remvoe expense");
+            int status = _expenseRepository.DeleteExpense(expenseID);
+            if(status == 0)
+            {
+                throw new ExpenseNotFoundException(expenseID);
+            }
         }
     }
 }
